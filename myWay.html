@@ -1,0 +1,113 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>myWay</title>
+	
+
+<script>
+window.onload = function(){ 
+     var audio = document.getElementById('bgm');
+         audio.play();//打开页面时有音乐
+}
+function play() {
+    var audio = document.getElementById('music');
+    if (audio.paused) {
+        audio.play();
+        document.getElementById('musicImg').src="musicOn.png";
+    }else{
+        audio.pause();
+        //audio.currentTime = 0;//如果增加此条，能够实现音乐从头播放；但自然衔接效果更佳，故注释掉
+        document.getElementById('musicImg').src="musicOff.png";
+    }
+}
+
+
+</script>	
+<style type="text/css">
+/*	采用层叠样式表*/
+body
+{ 
+  background-image:url("cover.jpg");
+/*	事先将html文件与图片保存为同一路径，背景图片相对路径直接可写为文件名*/
+  background-repeat:no-repeat;
+/*	背景图片不循环出现*/
+  background-attachment:fixed;
+/*	设置固定的背景图像*/
+  background-position:center;
+/*	图片居中*/
+  background-color:#433B49;
+/*	两侧部分选区设置为深紫色*/
+}
+</style>
+</head>
+
+<body>
+<!--音乐控件-->
+	<div>
+		<audio id="music" src="bgm.mp3" loop="loop" autoplay></audio>
+		<img id="musicImg" src="musicOn.png" onClick="play()" alt="musicImg" width="5%" style="margin-left: 0%;margin-top: 0%"/>
+	</div>
+<!--中间按钮热区-->
+	<div align="center" >
+		<img src="button.png" usemap="#Map"></a></a>
+        <map name="Map">
+          <area shape="rect" coords="5,1,233,59" href="AR.js-master/three.js/examples/marker-training/examples/generator.html" target="_blank">
+          <area shape="rect" coords="3,84,226,136" href="localhost:8080/htdocs/test.html" target="_blank">
+          <area shape="rect" coords="237,12,270,46" id="info1">
+          <area shape="rect" coords="234,93,269,129" id="info2">
+        </map>
+	</div>
+<!--第一个对话框-->
+	<dialog style='width:400px' id='dialog-info1' class="mdl-dialog">
+		<h4 class="mdl-dialog__title" style="text-align: center">AR code generator</h4>
+		<div class="mdl-dialog__content">
+			<p>With this you can generate an ar code of your own.<br/>(ps:only can be used after patterning)</p>
+		</div>
+		<div class="mdl-dialog__actions1" style="text-align: center">
+			<button type="button" class="mdl-button">OK</button>
+		</div>
+	</dialog>
+
+	<script>
+		//按下对话按钮OK，对话框关闭
+		var dialogElement1 = document.querySelector('#dialog-info1')
+		if (! dialogElement1.showModal) {
+			dialogElementPolyfill.registerDialog(dialogElement1)
+		}
+		dialogElement1.querySelector('.mdl-dialog__actions1 button').addEventListener('click', function() {
+			dialogElement1.close()
+		})
+		//点击热区，弹出对话框
+		var showDialogButton1 = document.querySelector('#info1')
+		showDialogButton1.addEventListener('click', function() {
+			dialogElement1.showModal()
+		})
+	</script>
+
+<!--第二个对话框-->
+	<dialog style='width:400px' id='dialog-info2' class="mdl-dialog2">
+		<h4 class="mdl-dialog__title" style="text-align: center">AR performance</h4>
+		<div class="mdl-dialog__content">
+			<p>After opening,please give permission to open your camera and put the pattern ahead of it.<br/>(ps:Refresh your screen if there is no response!)</p>
+		</div>
+		<div class="mdl-dialog__actions2" style="text-align: center">
+			<button type="button" class="mdl-button">OK</button>
+		</div>
+	</dialog>
+	<!--按下对话按钮OK，对话框关闭-->
+	<script>
+		var dialogElement2 = document.querySelector('#dialog-info2')
+		if (! dialogElement2.showModal) {
+			dialogElementPolyfill.registerDialog(dialogElement2)
+		}
+		dialogElement2.querySelector('.mdl-dialog__actions2 button').addEventListener('click', function() {
+			dialogElement2.close()
+		})
+
+		var showDialogButton2 = document.querySelector('#info2')
+		showDialogButton2.addEventListener('click', function() {
+			dialogElement2.showModal()
+		})
+	</script>
+</body>
+</html>
